@@ -1,0 +1,8 @@
+include: package:flutter_lints/flutter.yaml
+ 
+linter:
+  rules:
+   - prefer_single_quotes
+analyzer:
+  errors: 
+    avoid_print: ignore

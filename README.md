@@ -18,3 +18,15 @@ The package aims to automate Dart code generation based on your Remote Config.
 This way you can provide an up-to-date Config object to the app and focus on using it your features.
 
 
+## Usage
+
+Add the package as dev dependency.
+
+```
+dev_dependencies:
+  firebase_remote_config_generator: ^0.1.1
+```
+
+Generate your Config by running:
+
+```flutter pub run firebase_remote_config_generator --help```
