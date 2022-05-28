@@ -1,1 +1,0 @@
-library firebase_remote_config_generator;

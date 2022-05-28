@@ -24,9 +24,10 @@ Add the package as dev dependency.
 
 ```
 dev_dependencies:
-  firebase_remote_config_generator: ^0.1.1
+  firebase_remote_config_generator: ^0.0.1
 ```
 
 Generate your Config by running:
 
 ```flutter pub run firebase_remote_config_generator --help```
+

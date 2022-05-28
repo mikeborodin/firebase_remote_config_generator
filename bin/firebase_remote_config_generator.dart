@@ -1,13 +1,3 @@
-void main(List<String> arguments) {
-  if (arguments.contains('--help')) {
-    print(
-      '''
-      FRC Generator
-        usage:
-        --credentials : Path to JSON file containing Firebase credentials
-        --output-path : Path to resulting file
-        --class-name : Name of Dart classname of parsed Config.
-      ''',
-    );
-  } else {}
-}
+import 'package:firebase_remote_config_generator/generator.dart' as generator;
+
+void main(List<String> arguments) => generator.main();
