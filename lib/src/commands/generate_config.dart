@@ -1,9 +1,9 @@
 import 'package:firebase_remote_config_generator/src/services/config_downloader/config_downloader.dart';
 
-class GenerateConfigInteractor {
+class GenerateConfigCommand {
   final ConfigDownloader downloader;
 
-  GenerateConfigInteractor(this.downloader);
+  GenerateConfigCommand(this.downloader);
 
   Future<void> execute() async {
     await downloader.download();
