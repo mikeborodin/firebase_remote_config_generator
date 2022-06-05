@@ -1,3 +1,5 @@
+import '../../entites/parameter.dart';
+
 abstract class ConfigGenerator {
-  String generate();
+  Future<String> generate(List<Parameter> parameters);
 }
