@@ -1,6 +1,15 @@
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:frc_generator_example/config.dart';
+import 'package:frc_generator_example/firebase_options.dart';
 
-void main() {
+void main() async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  FirebaseRemoteConfig.instance.ensureInitialized();
+  final values = FirebaseRemoteConfig.instance.getAll();
+  AppConfig.fromValues(values);
+
   runApp(const MyApp());
 }
 

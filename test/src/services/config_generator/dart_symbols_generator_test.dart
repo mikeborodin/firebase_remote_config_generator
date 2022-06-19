@@ -3,7 +3,7 @@ import 'package:firebase_remote_config_generator/src/services/config_generator/d
 import 'package:test/test.dart';
 
 void main() {
-  final generator = DartSymbolsGenerator();
+  final generator = DartSymbolsGenerator(className: 'Config');
   test('should generate boolean config field', () {
     var code = generator.generateParameterField(Parameter(
       name: 'flag',
@@ -32,6 +32,50 @@ bool flag = true;'''
       '''
 /// my feature flag
 bool flag = false;'''
+          .trim(),
+    );
+  });
+
+  test('should generate String config field', () {
+    var code = generator.generateParameterField(Parameter(
+      name: 'flag',
+      description: 'my String parameter',
+      type: ParameterType.string,
+      defaultValue: 'ABC',
+    ));
+    expect(
+      code,
+      '''
+/// my String parameter
+String flag = 'ABC';'''
+          .trim(),
+    );
+  });
+
+  test('should generate Map config field', () {
+    var code = generator.generateParameterField(Parameter(
+      name: 'flag',
+      description: 'my JSON parameter',
+      type: ParameterType.json,
+      defaultValue: {
+        'a': 'b',
+        'c': 1,
+        'd': true,
+        'e': {'aa': 'bb'}
+      },
+    ));
+    expect(
+      code.replaceAll('\n', '').replaceAll(' ', '').trim(),
+      '''
+/// my JSON parameter
+Map<String, dynamic> flag = {
+        'a': 'b',
+        'c': 1,
+        'd': true,
+        'e': {'aa': 'bb',},
+      };'''
+          .replaceAll(' ', '')
+          .replaceAll('\n', '')
           .trim(),
     );
   });

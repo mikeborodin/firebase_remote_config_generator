@@ -27,20 +27,51 @@ class GoogleapisConfigDownloader implements ConfigDownloader {
           await FirebaseRemoteConfigApi(httpClient).projects.getRemoteConfig('projects/$project');
 
       config.parameters?.forEach((key, value) {
-        print('$key $value\n');
+        print('$key ${value.valueType}\n');
       });
 
       return config.parameters?.entries.map((entry) {
             return Parameter(
               name: entry.key,
               description: entry.value.description ?? '',
-              type: ParameterType.boolean,
-              defaultValue: entry.value.defaultValue?.value == 'true',
+              type: _mapType(entry.value.valueType!),
+              defaultValue: _mapDefaultValue(entry),
             );
           }).toList() ??
           [];
     } finally {
       httpClient.close();
+    }
+  }
+
+  dynamic _mapDefaultValue(MapEntry<String, RemoteConfigParameter> entry) {
+    final type = _mapType(entry.value.valueType!);
+
+    switch (type) {
+      case ParameterType.boolean:
+        return entry.value.defaultValue?.value == 'true';
+      case ParameterType.string:
+        return entry.value.defaultValue?.value ?? '';
+      case ParameterType.json:
+        return jsonDecode(entry.value.defaultValue?.value ?? '{}');
+      case ParameterType.number:
+        print(entry.value.defaultValue?.value);
+        return double.tryParse(entry.value.defaultValue?.value ?? '') ?? 0;
+    }
+  }
+
+  ParameterType _mapType(String string) {
+    switch (string) {
+      case 'NUMBER':
+        return ParameterType.number;
+      case 'STRING':
+        return ParameterType.string;
+      case 'BOOLEAN':
+        return ParameterType.boolean;
+      case 'JSON':
+        return ParameterType.json;
+      default:
+        throw Exception('unsupported value type');
     }
   }
 }

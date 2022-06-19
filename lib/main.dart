@@ -13,6 +13,5 @@ void main(List<String> arguments) {
     FileIoManager(),
   );
 
-  print('starting');
   command.execute();
 }

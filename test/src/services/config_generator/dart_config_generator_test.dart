@@ -5,18 +5,21 @@ import 'package:test/test.dart';
 
 void main() {
   final ConfigGenerator generator = DartConfigGenerator();
-  test('should generate config class body', () {
-    final code = generator.generate([
-      Parameter(
-        name: 'featureA',
-        description: 'my feature A',
-        type: ParameterType.boolean,
-        defaultValue: false,
-      )
-    ]);
+  test('should generate config class body', () async {
+    final code = await generator.generate(
+      [
+        Parameter(
+          name: 'featureA',
+          description: 'my feature A',
+          type: ParameterType.boolean,
+          defaultValue: false,
+        )
+      ],
+      'Config',
+    );
 
-    expect(code, startsWith('class Config {'));
-    expect(code, endsWith('}\n'));
+    expect(code, contains('class Config {'));
+    expect(code, endsWith('}'));
   });
 
   test('should contain all parameters names', () async {
@@ -40,7 +43,7 @@ void main() {
         defaultValue: false,
       ),
     ];
-    final code = await generator.generate(parameters);
+    final code = await generator.generate(parameters, 'Config');
 
     parameters.map((parameter) => 'bool ${parameter.name} = false;').every(
           (expectedSymbol) => code.contains(expectedSymbol),
