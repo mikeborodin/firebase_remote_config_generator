@@ -8,16 +8,9 @@ The package aims to automate Dart code generation based on your Remote Config.
 
 This way you can provide an up-to-date Config object to the app and focus on using it your features.
 
-
-Examples include:
-* Feature flags
-* Texts
-* Colors
-* Complex JSON objects
-
 # Installation
 
-Dev dependency:
+add as dev dependency:
 
 ```
 dev_dependencies:
@@ -26,7 +19,11 @@ dev_dependencies:
 
 ## Usage
 
-Generate your Config by running:
-
-```dart pub run firebase_remote_config_generator generate```
+```
+dart run firebase_remote_config_generator generate \
+--service-account-file local/service_account.json \
+--also-print \
+--format dart \
+--class-name AppConfig
+```
 
