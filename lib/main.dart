@@ -1,17 +1,21 @@
-library firebase_remote_config_generator;
+library;
 
+import 'package:args/command_runner.dart';
 import 'package:firebase_remote_config_generator/src/services/config_generator/dart_config_generator.dart';
-import 'package:firebase_remote_config_generator/src/services/io_manager/file_io_manager.dart';
-
 import 'src/commands/generate_config.dart';
-import 'src/services/config_downloader/googleapis_config_downloader.dart';
+import 'src/services/services.dart';
 
-void main(List<String> arguments) {
-  final command = GenerateConfigCommand(
-    GoogleapisConfigDownloader(),
-    DartConfigGenerator(),
-    FileIoManager(),
-  );
+Future<void> main(List<String> arguments) async {
+  final runner = CommandRunner(
+      'firebase_remote_config_generator', 'Create Dart code based on FRC')
+    ..addCommand(
+      GenerateConfigCommand(
+        GoogleapisConfigDownloader(),
+        DartConfigGenerator(),
+        FileIoManager(),
+        ConsoleLogger(),
+      ),
+    );
 
-  command.execute();
+  return runner.run(arguments);
 }

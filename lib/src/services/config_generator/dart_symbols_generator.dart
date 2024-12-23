@@ -70,7 +70,8 @@ class DartSymbolsGenerator {
   }
 
   String generateDefaultConstructor(List<Parameter> parameters) {
-    final constructorParams = parameters.map((param) => 'required this.${param.name},').join();
+    final constructorParams =
+        parameters.map((param) => 'required this.${param.name},').join();
     return '$className({$constructorParams});';
   }
 
@@ -85,9 +86,6 @@ class DartSymbolsGenerator {
         return '{\n${map.keys.map((key) => "'$key': ${_symbolizeMapValue(map[key])}").join(',\n')}\n,\n}';
       case ParameterType.number:
         return parameter.defaultValue.toString();
-
-      default:
-        return '';
     }
   }
 

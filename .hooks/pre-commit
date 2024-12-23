@@ -1,4 +1,6 @@
 flutter analyze
+flutter test
+
 if [ $? -ne 0 ]; then
   echo "Please fix linter issues."
   exit 1
