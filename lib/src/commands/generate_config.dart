@@ -16,12 +16,14 @@ final classNameOpt = 'class-name';
 class GenerateConfigCommand extends Command {
   final ConfigDownloader downloader;
   final ConfigGenerator dartGenerator;
+  final ConfigGenerator jsonGenerator;
   final IoManager ioManager;
   final Logger logger;
 
   GenerateConfigCommand(
     this.downloader,
     this.dartGenerator,
+    this.jsonGenerator,
     this.ioManager,
     this.logger,
   ) {
@@ -67,6 +69,8 @@ class GenerateConfigCommand extends Command {
     final format = results[formatOpt] as String;
     final printConsole = results[printConsoleOpt] as bool;
 
+    final generator = format == 'json' ? jsonGenerator : dartGenerator;
+
     final file = File(serviceAccountPath);
     if (!file.existsSync()) {
       logger.log('Service Account File  "$serviceAccountPath" does not exist');
@@ -75,9 +79,9 @@ class GenerateConfigCommand extends Command {
 
     final parameters = await downloader.download(file);
 
-    final code = await dartGenerator.generate(parameters, className);
+    final code = await generator.generate(parameters, className);
 
-    ioManager.write(output, code);
+    if (output.isNotEmpty) ioManager.write(output, code);
 
     if (printConsole) {
       logger.log(code);

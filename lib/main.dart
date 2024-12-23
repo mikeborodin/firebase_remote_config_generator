@@ -3,6 +3,7 @@ library;
 import 'package:args/command_runner.dart';
 import 'package:firebase_remote_config_generator/src/services/config_generator/dart_config_generator.dart';
 import 'src/commands/generate_config.dart';
+import 'src/services/config_generator/json_generator.dart';
 import 'src/services/services.dart';
 
 Future<void> main(List<String> arguments) async {
@@ -12,6 +13,7 @@ Future<void> main(List<String> arguments) async {
       GenerateConfigCommand(
         GoogleapisConfigDownloader(),
         DartConfigGenerator(),
+        JsonConfigGenerator(),
         FileIoManager(),
         ConsoleLogger(),
       ),

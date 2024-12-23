@@ -100,7 +100,6 @@ class DartSymbolsGenerator {
         return '$value';
       default:
         if (value is Map) {
-          print('map');
           final map = value;
           return '{\n${map.keys.map((key) => "'$key': ${_symbolizeMapValue(map[key])},").join('\n')}\n}';
         }

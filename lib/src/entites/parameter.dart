@@ -1,4 +1,3 @@
-
 enum ParameterType {
   boolean,
   string,

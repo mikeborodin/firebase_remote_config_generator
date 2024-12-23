@@ -29,10 +29,6 @@ class GoogleapisConfigDownloader implements ConfigDownloader {
           .projects
           .getRemoteConfig('projects/$project');
 
-      config.parameters?.forEach((key, value) {
-        print('$key ${value.valueType}\n');
-      });
-
       return config.parameters?.entries.map((entry) {
             return Parameter(
               name: entry.key,
@@ -58,7 +54,6 @@ class GoogleapisConfigDownloader implements ConfigDownloader {
       case ParameterType.json:
         return jsonDecode(entry.value.defaultValue?.value ?? '{}');
       case ParameterType.number:
-        print(entry.value.defaultValue?.value);
         return double.tryParse(entry.value.defaultValue?.value ?? '') ?? 0;
     }
   }
