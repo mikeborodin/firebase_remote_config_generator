@@ -3,7 +3,7 @@
 #StandwithUkraine! 💙💛
 
 
-Many Flutter apps use 🔥 Firebase Remote Config and this it's great!
+Many Flutter apps use 🔥 Firebase Remote Config and it's great!
 Yet as the number of parameters grows, updating Dart code can become tedious and/or source of human errors. 
 This package aims to automate code generation based on your Remote Config so that your code will always reflect your state in the Firebase console.
 
