@@ -3,10 +3,15 @@
 #StandwithUkraine! 💙💛
 
 
-Many Flutter apps use Firebase Remote Config to fetch app config at runtime without releasing a new version.
-As the number of parameters grows, updating Dart code can become tedious and/or source of human errors. 
-The package aims to automate Dart code generation based on your Remote Config.
-This way you can provide an up-to-date Config object to the app and focus on using it your features.
+Many Flutter apps use 🔥 Firebase Remote Config and this it's great!
+Yet as the number of parameters grows, updating Dart code can become tedious and/or source of human errors. 
+This package aims to automate code generation based on your Remote Config so that your code will always reflect your state in the Firebase console.
+
+
+## Workflow:
+* Add new FRC parameters in Firebase
+* Run generate
+* Use the added parameters in Dart
 
 ## Usage
 
